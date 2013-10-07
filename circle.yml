@@ -9,4 +9,5 @@ test:
 deployment:
   appengine:
     branch: master
-    commands: ./gradlew gaeUpdate
+    commands: 
+      - ./gradlew gaeUpdate
