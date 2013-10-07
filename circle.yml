@@ -6,3 +6,7 @@ test:
   override:
     - ./gradlew test
 
+deployment:
+  appengine:
+    branch: master
+    commands: ./gradlew gaeUpdate

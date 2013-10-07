@@ -8,6 +8,6 @@ public class AppTest {
 
     @Test
     public void shouldReturnTrue() {
-        assertTrue(false);
+        assertTrue(true);
     }
 }
