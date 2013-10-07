@@ -1,0 +1,62 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'gae'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.7
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath 'org.gradle.api.plugins:gradle-gae-plugin:0.8.1'
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	all*.exclude module: 'commons-logging'
+}
+
+dependencies {
+
+
+	compile 'com.google.appengine:appengine-api-1.0-sdk:1.8.0',
+			'com.google.appengine:appengine-api-labs:1.8.0',
+			'com.google.inject:guice:3.0',
+			'com.google.inject.extensions:guice-servlet:3.0'
+
+	compile 'javax.servlet:servlet-api:2.5'
+
+	testCompile 'junit:junit:4.11'
+
+	gaeSdk 'com.google.appengine:appengine-java-sdk:1.8.0'
+}
+
+gae {
+	httpPort = 8085
+	optimizeWar = true
+	downloadSdk = true
+
+	appcfg {
+		email = System.getenv()['APPENGINE_EMAIL']
+        password = System.getenv()['APPENGINE_PASSWORD']
+
+		passIn = true
+		noCookies = true
+
+		logs {
+			severity = 1
+			outputFile = file('mylogs.txt')
+		}
+
+		app {
+			id = 'gaeteststolarczykt'
+		}
+	}
+}
